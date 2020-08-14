@@ -75,6 +75,14 @@ exports.getSlidesData = (req, res) => {
         "Movie List - Mobile5",
       ],
     },
+
+    membershipList: {
+      pageTitle: "Membership Management",
+      webpageUiLinks: [],
+      webLegendContents: [],
+      mobileUiLinks: [],
+      mobileLegendContents: [],
+    },
   };
   res.send(getSlidesData);
 };
