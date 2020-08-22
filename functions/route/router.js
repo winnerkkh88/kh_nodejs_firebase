@@ -14,8 +14,11 @@ route.route("/sendFeedbackEmail").post(sendFeedbackEmail.feedbackHandle);
 const slidesData = require("../controller/slidesData");
 route.route("/slidesData").get(slidesData.getSlidesData);
 
-//getting membership data from Realtime Database of Firstbase
+//CRUD membership data from Realtime Database of Firstbase
 const membership = require("../controller/db/membership");
-route.route("/membership").get(membership.membership);
+route.route("/membership").get(membership.readMembership);
+route.route("/membership").post(membership.createMembership);
+// route.route("/membership").put(membership.updateMembership);
+route.route("/membership").delete(membership.deleteMembership);
 
 module.exports = route;
