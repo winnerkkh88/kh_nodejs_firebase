@@ -8,7 +8,7 @@ const db = firebaseDbSetting.db;
 // prettier-ignore
 exports.createMembership = (req, res) => {
   const {id, firstName, lastName, birthday, gender, email, phoneNumber, job, city, country, comment, regDate} = req.body.memberInfo
-   const picture = (req.body.memberInfo.picture !== undefined) ? req.body.memberInfo.picture : "";
+  const picture = (req.body.memberInfo.picture !== undefined) ? req.body.memberInfo.picture : "";
   db.collection("memberList")
     .doc(id)
     .set({id, picture, firstName, lastName, birthday, gender, email, phoneNumber, job, city, country, comment, regDate})
@@ -40,7 +40,16 @@ exports.readMembership = (req, res) => {
 
 // //Update(UPDATE) membership data here
 // exports.updateMembership = (req, res) => {};
+
 //Delete(DELETE) membership data here
 exports.deleteMembership = (req, res) => {
-  db.collection("memberList").doc(req.body.id).delete();
+  db.collection("memberList")
+    .doc(req.body.key.id)
+    .delete()
+    .then(() => {
+      res.send();
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
 };
