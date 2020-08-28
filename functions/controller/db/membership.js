@@ -4,7 +4,7 @@ const firebaseDbSetting = require("./firebaseDbSetting");
 // Use the db object of firebaseDbSetting
 const db = firebaseDbSetting.db;
 
-//Create(POST) member data here
+// Create(POST) member data here
 // prettier-ignore
 exports.createMembership = (req, res) => {
   const {id, firstName, lastName, birthday, gender, email, phoneNumber, job, city, country, comment, regDate} = req.body.memberInfo
@@ -20,7 +20,7 @@ exports.createMembership = (req, res) => {
     });
 };
 
-//Read(GET) membership data
+// Read(GET) membership data
 exports.readMembership = (req, res) => {
   db.collection("memberList")
     .orderBy("id", "asc")
@@ -38,10 +38,21 @@ exports.readMembership = (req, res) => {
     });
 };
 
-// //Update(UPDATE) membership data here
-// exports.updateMembership = (req, res) => {};
+// prettier-ignore
+// Update(UPDATE) membership data here
+exports.updateMembership = (req, res) => {
+  const {id, firstName, lastName, birthday, gender, email, phoneNumber, job, city, country, comment, picture} = req.body.updatedInfo
+  db.collection("memberList").doc(id).update({
+    firstName, lastName, birthday, gender, email, phoneNumber, job, city, country, comment, picture
+  }).then(() => {
+      res.send();
+    })
+    .catch((error) => {
+      throw new Errow(error);
+    });
+};
 
-//Delete(DELETE) membership data here
+// Delete(DELETE) membership data here
 exports.deleteMembership = (req, res) => {
   db.collection("memberList")
     .doc(req.body.key.id)

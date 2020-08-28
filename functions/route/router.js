@@ -18,7 +18,7 @@ route.route("/slidesData").get(slidesData.getSlidesData);
 const membership = require("../controller/db/membership");
 route.route("/membership").get(membership.readMembership);
 route.route("/membership").post(membership.createMembership);
-// route.route("/membership").put(membership.updateMembership);
+route.route("/membership").put(membership.updateMembership);
 route.route("/membership").delete(membership.deleteMembership);
 
 module.exports = route;
